@@ -1,0 +1,8 @@
+= CodeRetreat
+
+This repo is for code and other useful stuff related to coderetreat
+
+== Contents
+
+* starting_points: holds iteration starting points for a number of languages
+* retreat_gem: a Ruby gem that makes it easy to begin an iteration using starting point
