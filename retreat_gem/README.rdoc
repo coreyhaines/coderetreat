@@ -1,0 +1,64 @@
+= Retreat 
+
+coderetreat/starting_points holds empty starting points in a variety of languages.  This gem allows you to easily start new iterations from a starting point from the command line without having to manually copy files around. 
+
+It works by pulling down a local copy of the github repo into ~/.retreat and building iterations from your local copy.  That way you can set everything up as a one-time operation and you don't need to worry if the WiFi is a bit wobbly on the day!
+
+Commands are also provided to pull the latest starting points down from github.
+
+== Installation
+
+Install the gem 
+
+  $ gem install retreat
+  
+Pull the starting points down from github
+    
+  $ retreat install
+  
+== How to get started 
+
+Show information
+
+  $ retreat info
+  
+Returns
+
+  Source Repo: https://github.com/coreyhaines/coderetreat.git
+  Local Repo: /Users/adrian/.retreat/retreat
+  Languages Available: ruby
+
+Choose your preferred language from the list of available languages and then
+ 
+  $ cd <code retreat dir>
+  $ retreat start <language> <target>
+  
+So, for example, if we want to start a new ruby iteration in ~/projects
+
+  $ cd ~/projects
+  $ retreat start ruby iteration1
+  Created ruby iteration starting point at /Users/adrian/projects/iteration1
+  $ ls iteration1
+  lib	spec	test
+
+Note that the target defaults to '.' if you don't supply one.
+
+== How to add new languages
+
+* Clone (or fork) the coderetreat repo from github (i.e this one!)
+* Create your starting point at starting_points/<your language>
+* Push your changes (or send a pull request)
+* Update retreat 
+  
+  $ retreat update
+  
+You should now be able to start a new iteration by running
+
+  $ retreat start <your langauge>
+
+== For support
+
+Please raise an issue or contact Adrian Mowat (github: mowat27) for help
+
+
+

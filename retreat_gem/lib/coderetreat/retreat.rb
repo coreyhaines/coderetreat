@@ -136,7 +136,7 @@ EOS
         result =<<EOS
   Source Repo: #{@source_repo}
   Local Repo: #{@local_repo}
-  Langauges Avilable: #{languages.join(",")}
+  Languages Available: #{languages.join(",")}
 EOS
      
       result
