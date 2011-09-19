@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+require 'coderetreat/retreat'
+
+include CodeRetreat
+
+def usage
+  result = <<EOS
+usage: #{__FILE__} action [command...]
+----
+Actions:
+  info                       : Prints information message
+  install                    : Downloads and installs starting point repo to ~/.retreat/retreat
+  update                     : Pulls latest langauge starting points from github source repo
+  start language [directory] : Starts a new iteration using 'language' in 'directory'
+                               directory defaults to '.' if not specified
+EOS
+
+  result
+end
+
+def fail_with_error(message)
+  STDERR.puts message
+  exit 9
+end
+
+def fail_with_usage_error(message)
+  STDERR.puts message
+  STDERR.puts usage
+  exit 9
+end
+
+fail_with_usage_error "Error: No args passed" if ARGV.empty?
+action = ARGV.shift
+
+begin
+  case
+    when action == "info"
+      Actions::Info.run!
+    when action == "install"
+      Actions::Install.run!
+    when action == "update"
+      Actions::Update.run!
+    when action == "start"
+      Actions::Start.run!(ARGV)      
+    else
+      raise UsageError.new("Error: unknown action '#{action}'")
+  end
+rescue UsageError => ex
+  fail_with_usage_error "Error: #{ex}"
+rescue EnvError => ex
+  fail_with_error "Error: #{ex}"
+end
+
