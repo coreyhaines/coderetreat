@@ -46,13 +46,30 @@ module CodeRetreat
     def ls
       Dir["#{@path}/*"].map{|listing_item| Path.new(listing_item)}
     end
+    
+    def flip_into_and_run
+      starting_dir = Dir.getwd
+      begin
+        Dir.chdir @path
+        yield
+      ensure
+        Dir.chdir starting_dir
+      end
+    end
+  end
+  
+  class Git
+    def self.clone(source_repo, local_repo)
+      %x{git clone #{source_repo} #{local_repo}}
+      raise EnvError.new("Could not clone #{source_repo}") unless $? == 0
+    end
   end
   
   module Actions
     class Action
       def initialize
         @home = Path.new(Etc.getpwuid.dir, '.retreat')
-        @local_repo = Path.new(Etc.getpwuid.dir, '.retreat', 'retreat')
+        @local_repo = Path.new(Etc.getpwuid.dir, '.retreat', 'coderetreat')
         @source_repo = "https://github.com/coreyhaines/coderetreat.git"
         @starting_points = @local_repo.join("starting_points")
       end
@@ -91,6 +108,7 @@ module CodeRetreat
         validate_environment!
         puts "Pulling coderetreat repo into #{@local_repo}..."
         %x{git clone #{@source_repo} #{@local_repo}}
+        raise EnvError.new("Installation failed - could not clone github repo") unless $? == 0
         puts "\nInstallation completed!  Here is some information..."        
         Info.run!
         puts "\nRun 'retreat start <language> [location]' to start a new iteration"
@@ -111,7 +129,7 @@ module CodeRetreat
       def run!
         validate_environment!
         puts "Updating sources at #{@local_repo}"
-        %x{git pull #{@local_repo}}
+        @local_repo.flip_into_and_run { %x!git pull origin master! }
       end
       
       def validate_environment!
