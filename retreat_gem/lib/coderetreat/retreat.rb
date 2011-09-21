@@ -20,7 +20,7 @@ module CodeRetreat
       relative_path = File.join(*elements)
       @path = File.expand_path(relative_path)
     end
-    
+
     def_file_op :exists?
     def_file_op :directory?
     def_file_op :file?
@@ -76,79 +76,96 @@ module CodeRetreat
     class Action
       def initialize
         @home = Path.new(Etc.getpwuid.dir, '.retreat')
-        @local_repo = Path.new(Etc.getpwuid.dir, '.retreat', 'coderetreat')
-        @source_repo = "https://github.com/coreyhaines/coderetreat.git"
-        @starting_points = @local_repo.join("starting_points")
+      end
+
+      def default_user
+        'coreyhaines'
+      end
+
+      def repo_url_for user
+        "https://github.com/#{user}/coderetreat.git"
+      end
+  
+      def repo_path user
+        repo_path = @home.join user
+        unless repo_path.exists?
+          puts "Pulling #{user}/coderetreat repo into #{repo_path}..."
+          Git.clone repo_url_for(user), repo_path
+          puts "\nInstallation completed!  Here is some information..."              
+        end
+        repo_path
+      end
+
+      def language user, language
+        repo_path(user).join('starting_points', language)
+      end
+
+      def languages user
+        repo_path(user).join('starting_points').ls.map{|path| path.basename}
       end
     end
-    
+
     class Start < Action
       def self.run!(args)
         new(args).run!
       end
-      
+
       def initialize(args)
         super()
-        @language = args[0]
-        @source = @starting_points.join(@language)
+        @user, @language = args[0].split('/')
+        @user, @language = default_user, @user unless @language
         @target = args[1] ? Path.new(args[1]) : Path.new('.')
       end
-      
+  
       def run!
         validate_environment!
-        @source.copy_to(@target)
+        language(@user, @language).copy_to(@target)
         puts "Created #{@language} iteration starting point at #{@target}"
       end
       
       def validate_environment!
-        raise EnvError.new("No sources found.  Try running 'retreat install' first") unless @source.directory?
         raise EnvError.new("Cannot create #{@target}") unless @target.dirname.writable?
       end
     end
     
     class Install < Action
-      def self.run!
-        new.run!
+      def self.run!(args)
+        new(args).run!
+      end
+
+      def initialize(args)
+        super()
+        @user = args[0] || default_user
       end
 
       def run!
-        validate_environment!
-        puts "Pulling coderetreat repo into #{@local_repo}..."
-        Git.clone @source_repo, @local_repo
-        puts "\nInstallation completed!  Here is some information..."        
-        Info.run!
+        repo_path @user
+        Info.run! [@user]
         puts "\nRun 'retreat start <language> [location]' to start a new iteration"
       end
-      
-      def validate_environment!
-        if @local_repo.exists? 
-          raise EnvError.new("retreat has already been installed.  Run 'retreat update' to get the latest starting points.")
-        end
-      end
     end
-    
+
     class Update < Action
-      def self.run!
-        new.run!
-      end 
-      
-      def run!
-        validate_environment!
-        puts "Updating sources at #{@local_repo}"
-        Git.pull @local_repo
-      end
-      
-      def validate_environment!
-        raise EnvError.new("retreat is not installed.  Run 'retreat install' to get started.") unless @local_repo.exists? 
-      end
-    end
-    
-    class Info < Action
-      def self.run!
-        new.run!
+      def self.run!(args)
+        new(args)
       end
 
-      def run!
+      def initialize(args)
+        super()
+        @user = args[0] || default_user
+        puts "Updating sources at #{repo_path @user}"
+        Git.pull repo_path(@user)
+      end
+    end
+
+    class Info < Action
+      def self.run!(args)
+        new(args)
+      end
+
+      def initialize(args)
+        super()
+        @user = args[0] || default_user
         result =<<EOS
         
 #{message}
@@ -158,16 +175,12 @@ EOS
       
       def message
         result =<<EOS
-  Source Repo: #{@source_repo}
-  Local Repo: #{@local_repo}
-  Languages Available: #{languages.join(", ")}
+  Source Repo: #{repo_url_for @user}
+  Local Repo: #{repo_path @user}
+  Languages Available: #{languages(@user).join(", ")}
 EOS
      
       result
-      end
-      
-      def languages
-        @starting_points.ls.map{|path| path.basename}
       end
     end
   end
