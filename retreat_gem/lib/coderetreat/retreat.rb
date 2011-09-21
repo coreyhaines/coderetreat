@@ -63,6 +63,13 @@ module CodeRetreat
       %x{git clone #{source_repo} #{local_repo}}
       raise EnvError.new("Could not clone #{source_repo}") unless $? == 0
     end
+    
+    def self.pull(local_repo)
+      local_repo.flip_into_and_run do
+        %x{git pull origin master}
+        raise EnvError.new("Could not pull origin master into #{local_repo}") unless $? == 0
+      end
+    end
   end
   
   module Actions
@@ -107,8 +114,7 @@ module CodeRetreat
       def run!
         validate_environment!
         puts "Pulling coderetreat repo into #{@local_repo}..."
-        %x{git clone #{@source_repo} #{@local_repo}}
-        raise EnvError.new("Installation failed - could not clone github repo") unless $? == 0
+        Git.clone @source_repo, @local_repo
         puts "\nInstallation completed!  Here is some information..."        
         Info.run!
         puts "\nRun 'retreat start <language> [location]' to start a new iteration"
@@ -129,7 +135,7 @@ module CodeRetreat
       def run!
         validate_environment!
         puts "Updating sources at #{@local_repo}"
-        @local_repo.flip_into_and_run { %x!git pull origin master! }
+        Git.pull @local_repo
       end
       
       def validate_environment!
@@ -154,7 +160,7 @@ EOS
         result =<<EOS
   Source Repo: #{@source_repo}
   Local Repo: #{@local_repo}
-  Languages Available: #{languages.join(",")}
+  Languages Available: #{languages.join(", ")}
 EOS
      
       result
