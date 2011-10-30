@@ -1,0 +1,10 @@
+target/
+.target/
+lib_managed/
+src_managed/
+project/boot/
+*.swp
+nbproject/
+bin/
+.scala_dependencies
+out/
