@@ -26,7 +26,7 @@ At the time this file was written, the latest version for download was
 ### Eclipse
 #### Install Pre-requisites
 1. Install [Eclipse IDE for Java Developers](http://www.eclipse.org/downloads/).
-   
+
    **Note:** the starting point was tested on the Indigo Eclipse Release.
 
 2. Add the Scala IDE Update Site:
@@ -45,7 +45,7 @@ At the time this file was written, the latest version for download was
 8. If prompted about installing unsigned content, click _Continue_
 9. When prompted, restart Eclipse
 
-_**Tip:**_ More detailed installation instructions for the Eclipse 
+_**Tip:**_ More detailed installation instructions for the Eclipse
 Scala plugin can be found on [the Scala IDE website](http://www.scala-ide.org/).
 
 
@@ -63,15 +63,15 @@ Scala plugin can be found on [the Scala IDE website](http://www.scala-ide.org/).
 ### NetBeans
 #### Install Pre-requisites
 1. Install [NetBeans](http://netbeans.org/downloads/).
-   You only need the edition which contains just Java SE. You don't 
+   You only need the edition which contains just Java SE. You don't
    need any of the other tools for the Coderetreat.
 
    **Note:** the starting point was tested on version 7.0.1.
 
 2. Install the Scala Plugins (download from: XXX). Installation
    instructions can be found at XXX.
-   
-_**Tip:**_ More detailed installation instructions for the NetBeans 
+
+_**Tip:**_ More detailed installation instructions for the NetBeans
 Scala plugin can be found on [the NetBeans Scala wiki page](http://wiki.netbeans.org/Scala).
 
 #### Import Starting Point
@@ -82,7 +82,7 @@ Scala plugin can be found on [the NetBeans Scala wiki page](http://wiki.netbeans
 5. Click _Open Project_
 6. Enjoy!
 
-## IntelliJ IDEA
+### IntelliJ IDEA
 #### Install Pre-requisites
 1. Install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/).
 
@@ -99,8 +99,8 @@ Scala plugin can be found on [the NetBeans Scala wiki page](http://wiki.netbeans
 5. Right-click on Scala plugin, and select _Download and Install_
     - Optionally install SBT plugin
 
-_**Tip:**_  More detailed installation instructions for the Scala 
-Plugin can be found at 
+_**Tip:**_  More detailed installation instructions for the Scala
+Plugin can be found at
 [Getting Started with IntelliJ IDEA Scala Plugin](http://confluence.jetbrains.net/display/SCA/Getting+Started+with+IntelliJ+IDEA+Scala+Plugin).
 
 #### Import Starting Point
