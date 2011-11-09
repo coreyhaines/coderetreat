@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-$: << File.dirname(__FILE__)+'/../lib'
-
 require 'coderetreat/retreat'
 
 include CodeRetreat
@@ -38,11 +36,11 @@ action = ARGV.shift
 begin
   case
     when action == "info"
-      Actions::Info.run!(ARGV)
+      Actions::Info.run!
     when action == "install"
-      Actions::Install.run!(ARGV)
+      Actions::Install.run!
     when action == "update"
-      Actions::Update.run!(ARGV)
+      Actions::Update.run!
     when action == "start"
       Actions::Start.run!(ARGV)      
     else
