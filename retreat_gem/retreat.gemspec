@@ -2,7 +2,7 @@ require 'rubygems'
 
 SPEC = Gem::Specification.new do |s|
   s.name = "retreat"
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.author = "Adrian Mowat"
   s.homepage = "https://github.com/coreyhaines/coderetreat"
   s.summary = "Command line utilities for coderetreat"
