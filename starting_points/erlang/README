@@ -1,0 +1,10 @@
+A template project for Erlang using EUnit and Rebar.
+
+You will need to have a standard installation of Erlang installed.
+
+A version of Rebar that runs on OSX, and should also work on Linux is included in the root of the erlang project.
+
+To run the tests, cd to the starting_points/erlang directory (the same directory that contains this file), and run
+
+   ./rebar eunit
+
