@@ -1,0 +1,66 @@
+/////// Simple Assertion
+TEST(Example, IntEquality)
+{
+  ASSERT_EQ(2, 42);   
+}
+
+/////// Example: Test with Mock object
+class MockSource : public ISource
+{
+public:
+   MOCK_METHOD0(getChar, char());
+};
+
+class MockDestination : public IDestination
+{
+public:
+   MOCK_METHOD1(setChar, void(char));
+};
+
+TEST(Scenario, BehaviorAndExpectedResult)
+{
+   MockSource source;
+   MockDestination destination;
+   Copier copier(&source, &destination);
+   
+   // behavior based verification   
+   EXPECT_CALL(source, getChar()).Times(2).WillOnce(Return('a').WillOnce(Return('\n'));
+   EXPECT_CALL(destination, setChar('a')).Times(1);
+   copier.copy();
+}
+
+
+/////// Example: Value Paramaterized Tests
+// Compound structure containing test values 
+struct TranslateParams
+{
+   TranslateParams(std::string expectedTranslation, int toTranslate) : expectedTranslation(expectedTranslation), toTranslate(toTranslate)
+   {
+   }
+   std::string expectedTranslation;
+   int toTranslate;
+};
+
+// Fixture
+class Translate : public ::testing::TestWithParam<TranslateParams>
+{
+
+};
+
+INSTANTIATE_TEST_CASE_P(Buzz, Translate, ::testing::Values(
+   TranslateParams("Buzz", 5),
+   TranslateParams("Buzz", 10) 
+   ));
+
+INSTANTIATE_TEST_CASE_P(Fizz, Translate, ::testing::Values(
+   TranslateParams("Fizz", 3),
+   TranslateParams("Fizz", 6)
+   ));
+
+
+TEST_P(Translate, ValueIsTranslated)
+{
+   Translator translator;
+   std::string result = translator.translate(GetParam().toTranslate);
+   ASSERT_EQ(GetParam().expectedTranslation, result);
+}
