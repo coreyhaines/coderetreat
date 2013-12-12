@@ -1,5 +1,7 @@
 *.gem
 target
-*.user
 bin
 obj
+*.user
+*.suo
+*.ncrunch*
