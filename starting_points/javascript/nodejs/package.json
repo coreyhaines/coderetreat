@@ -1,0 +1,14 @@
+{
+  "name": "nodejs",
+  "version": "0.0.1",
+  "description": "coderetreat nodejs starting point",
+  "main": "codereatreat.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "author": "alexander.beletsky@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "~1.15.1"
+  }
+}
