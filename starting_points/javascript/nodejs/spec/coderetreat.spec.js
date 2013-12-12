@@ -1,4 +1,5 @@
 var gameOfLife = require('../coderetreat');
+var expect = require('chai').expect;
 
 describe('coderetreat.spec.js', function () {
 	var result;
@@ -9,7 +10,7 @@ describe('coderetreat.spec.js', function () {
 		});
 
 		it('should return 0', function () {
-			expect(result).toEqual(0);
+			expect(result).to.equal(0);
 		});
 	});
 
