@@ -1,2 +1,9 @@
 *.gem
 target
+bin
+obj
+*.user
+*.suo
+*.ncrunch*
+.idea
+*.iml
