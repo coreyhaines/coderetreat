@@ -11,17 +11,15 @@ the build systems directly (or to create your own IDE configuration).
 
 This starting point includes the following libraries:
 
-* [Scala 2.9.0.1](http://www.scala-lang.org/)
-* [ScalaTest 1.6.1](http://scalatest.org/)
-* [Specs 1.4.4](http://code.google.com/p/specs/)
-* [JUnit 4.8.2](http://www.junit.org/) (for running tests in some of the IDEs)
+* [Scala 2.11.4](http://www.scala-lang.org/)
+* [ScalaTest 2.2.1](http://scalatest.org/)
+* [Specs 2.3.13](http://code.google.com/p/specs/)
+* [JUnit 4.11](http://www.junit.org/) (for running tests in some of the IDEs)
 
 ### Java
 Of course, to develop in Scala, you need Java.
 
-Install [Java SE SDK 6](http://www.oracle.com/technetwork/java/javase/downloads/index.html). 
-At the time this file was written, the latest version for download was
-[Java SE 6 Update 29](http://www.oracle.com/technetwork/java/javase/downloads/jdk-6u29-download-513648.html).
+Install [Java SE SDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html). 
 
 ### Eclipse
 #### Install Pre-requisites
@@ -88,20 +86,13 @@ Scala plugin can be found on [the NetBeans Scala wiki page](http://wiki.netbeans
 
    **Note:** the starting point was tested on version 10.5.
 
-2. Launch IntelliJ IDEA and open the Plugin Manager. Ether:
-    * Click the _Open Plugin Manager_ link on the Welcome Page
-      or:
-    * Open the IDE Settings (_File -> Settings_) and select _Plugins_
-      under _IDE Settings_
-
-3. Switch to the _Available_ tab
-4. Type **Scala** in the search textbox
-5. Right-click on Scala plugin, and select _Download and Install_
-    - Optionally install SBT plugin
+2. Launch sbt and run command **get-idea**
 
 _**Tip:**_  More detailed installation instructions for the Scala
 Plugin can be found at
 [Getting Started with IntelliJ IDEA Scala Plugin](http://confluence.jetbrains.net/display/SCA/Getting+Started+with+IntelliJ+IDEA+Scala+Plugin).
+
+[mpeltonen/sbt-idea](https://github.com/mpeltonen/sbt-idea)
 
 #### Import Starting Point
 1. Launch IntelliJ IDEA
