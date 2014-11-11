@@ -1,11 +1,19 @@
 name := "conways-game-of-life-scala"
 
-version := "1.0.0"
+version := "0.1"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.11.4"
 
-scalacOptions ++= Seq("-deprecation", "-feature")
+scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
 
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "1.9.2" % "test"
+resolvers ++= Seq(
+  "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases/",
+  "sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",
+  "typesafe repo" at "http://repo.typesafe.com/typesafe/releases/"
+)
 
-libraryDependencies += "junit" % "junit" % "4.10" % "test"
+libraryDependencies ++= Seq(
+   "org.specs2"         %   "specs2_2.10"            % "2.3.13"     % "test"
+  ,"junit"              %   "junit"                  % "4.11"       % "test"
+  ,"org.scalatest"      %   "scalatest_2.11"         % "2.2.1"      % "test"
+)
