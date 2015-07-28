@@ -1,4 +1,3 @@
 test('is foo "bar" ?', function() {
-    equals(foo(), "bar");
-})
-
+    equal(foo(), "bar");
+});
