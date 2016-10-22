@@ -7,11 +7,10 @@ import Html.Attributes exposing (style)
 
 
 main =
-    Html.program
-        { init = init
+    Html.beginnerProgram
+        { model = model
         , view = view
         , update = update
-        , subscriptions = \model -> Sub.none
         }
 
 
@@ -23,11 +22,9 @@ type alias Model =
     {}
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( {}
-    , Cmd.none
-    )
+model : Model
+model =
+    {}
 
 
 
@@ -38,11 +35,11 @@ type Msg
     = Nop
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Nop ->
-            ( model, Cmd.none )
+            model
 
 
 
