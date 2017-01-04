@@ -1,9 +1,6 @@
 module GameOfLife exposing (..)
 
 import Html exposing (Html, Attribute, button, div, text, table, tr, td)
-import Html.App as Html
-import Html.Events exposing (onClick)
-import Html.Attributes exposing (style)
 
 
 main =
