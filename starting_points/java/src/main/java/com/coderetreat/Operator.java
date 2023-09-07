@@ -1,8 +1,7 @@
 package com.coderetreat;
 
 public class Operator {
-    private static boolean lights[][] = new boolean[999][999];
-
+    private static Light lights[][] = new Light[999][999];
     private static Switcher switcher = new SwitcherImpl();
     public static void operateThrough(Point p1, Point p2 , String operation){
         for(int i = p1.x ; i <= p2.x ;i++){
@@ -19,26 +18,18 @@ public class Operator {
                         break;
                     default:
                         break;
-
                 }
-
             }
         }
     }
-    public static int LightCounter(){
-        int counter = 0;
+    public static int BrightnessCounter(){
+        int brightness = 0;
         for(int i = 0 ; i <= 999 ; i++){
             for(int j = 0 ; j <= 999 ; j++){
-                counter++;
+                brightness =+ lights[i][j].getBrightness();
             }
         }
-        return counter;
+        return brightness;
     }
-    /*public static void showlights(){
-        for(int i = 0 ; i <= 999 ; i++){
-            for(int j = 0 ; j <= 999 ; j++){
 
-            }
-        }
-    }*/
 }

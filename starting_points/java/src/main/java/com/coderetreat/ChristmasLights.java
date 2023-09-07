@@ -1,6 +1,6 @@
 package com.coderetreat;
 
-import static com.coderetreat.Operator.LightCounter;
+import static com.coderetreat.Operator.BrightnessCounter;
 import static com.coderetreat.Operator.operateThrough;
 
 class ChristmasLights{
@@ -44,7 +44,7 @@ class ChristmasLights{
         p2 = new Point(844,448);
         operateThrough(p1, p2, "toggle");
 
-        System.out.println(LightCounter());
+        System.out.println(BrightnessCounter());
 
     }
 
